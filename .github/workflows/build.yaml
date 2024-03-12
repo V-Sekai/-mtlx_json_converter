@@ -34,10 +34,14 @@ jobs:
         run: |
           pyinstaller --onefile mtlx_json_converter.py
 
+      - name: Set Artifact Name
+        id: vars
+        run: echo "::set-output name=artifact_name::$(echo Python${{ matrix.python-version }}-${{ runner.os }}-${{ github.repository }} | tr '[:upper:]' '[:lower:]')"
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.repository }}-${{ runner.os }}-Python${{ matrix.python-version }}
+          name: ${{ steps.vars.outputs.artifact_name }}
           path: dist/
 
       - name: Create Release
