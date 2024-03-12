@@ -1,1 +1,1 @@
-# -mtlx_json_converter
+# mtlx_json_converter
